@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { getEnv } from '../utils/envs';
+import { User } from '../entity/User';
 
 export class DatabaseConfig {
   private static dataSource: DataSource;
@@ -13,6 +14,7 @@ export class DatabaseConfig {
         username: getEnv('DB_USER', 'admin'),
         password: getEnv('DB_PASSWORD', 'password'),
         database: getEnv('DB_NAME', 'test_db'),
+        entities: [User],
         synchronize: true,
         logging: false,
       });
