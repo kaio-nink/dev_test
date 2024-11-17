@@ -1,6 +1,7 @@
 import express from 'express';
 import 'reflect-metadata';
 import AppDataSource from './data-source';
+import makeUserController from './factories/user-factory';
 
 const app = express();
 app.use(express.json());
@@ -20,9 +21,9 @@ const initializeDatabase = async () => {
 
 initializeDatabase();
 
-app.post('/users', async (req, res) => {
-  // Crie o endpoint de users
-});
+const userController = makeUserController()
+
+app.post('/users', async (req, res) => userController.store(req, res));
 
 app.post('/posts', async (req, res) => {
   // Crie o endpoint de posts
