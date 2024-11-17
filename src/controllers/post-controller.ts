@@ -15,7 +15,7 @@ export class PostController {
       const createdPost = await this.postService.createPost(postDTO);
       res.status(201).json(createdPost)
     } catch (error) {
-      if (error instanceof BadRequestError || error instanceof NotFoundError) return res.status(400).send({ message: error.message })
+      if (error instanceof BadRequestError || error instanceof NotFoundError) return res.status(error.statusCode).send({ message: error.message })
 
       console.error("Unexpected error:", error);
       res.status(500).send({ message: "Internal Server Error" })

@@ -14,7 +14,7 @@ export class UserController {
       const createdUser = await this.userService.createUser(userDTO);
       res.status(201).json(createdUser)
     } catch (error) {
-      if (error instanceof BadRequestError) return res.status(400).send({ message: error.message })
+      if (error instanceof BadRequestError) return res.status(error.statusCode).send({ message: error.message })
 
       console.error("Unexpected error:", error);
       res.status(500).send({ message: "Internal Server Error" })
