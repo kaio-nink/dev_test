@@ -1,3 +1,4 @@
+import { BadRequestError } from '../utils/errors/bad-request-error';
 import { isEmail, isEmpty } from '../utils/string-util';
 
 export class UserDTO {
@@ -15,8 +16,8 @@ export class UserDTO {
   }
 
   private validate(firstName: string, lastName: string, email: string): void {
-    if (isEmpty(firstName)) throw new Error('First name is required')
-    if (isEmpty(lastName)) throw new Error('Last name is required')
-    if (isEmpty(email) || !isEmail(this.email)) throw new Error('Invalid email format')
+    if (isEmpty(firstName)) throw new BadRequestError('First name is required')
+    if (isEmpty(lastName)) throw new BadRequestError('Last name is required')
+    if (isEmpty(email) || !isEmail(this.email)) throw new BadRequestError('Invalid email format')
   }
 }
