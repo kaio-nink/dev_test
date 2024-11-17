@@ -1,4 +1,5 @@
 import { PostDTO } from '../dtos/post-dto';
+import { PostResponseDTO } from '../dtos/post-response-dto';
 import { PostRepository } from '../repositories/post-repository';
 import { UserRepository } from '../repositories/user-repository';
 import { NotFoundError } from '../utils/errors/not-found-error';
@@ -12,6 +13,6 @@ export class PostService {
     if (!user) throw new NotFoundError(`Couldn't find the specified user.`);
 
     const createdPost = await this.postRepository.create({ ...post, user })
-    return createdPost;
+    return new PostResponseDTO(createdPost);
   }
 }
